@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - لوحة الطالبة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/typography.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>UniRide</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="notifications">
+                        <button class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge">3</span>
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-item">
+                                <p>تم تأكيد رحلتك غداً</p>
+                                <small>منذ 5 دقائق</small>
+                            </div>
+                            <div class="notification-item">
+                                <p>السائق أحمد سيصل خلال 10 دقائق</p>
+                                <small>منذ ساعة</small>
+                            </div>
+                            <div class="notification-item">
+                                <p>تم تحديث جدولك الدراسي</p>
+                                <small>منذ يومين</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings">
+                        <button class="settings-btn" onclick="window.location.href='student-settings.html'">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="profile">
+                        <button class="profile-btn" onclick="window.location.href='student-profile.html'">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Live Trip Tracking Section -->
+            <section class="live-trip-section">
+                <div class="trip-header">
+                    <h2>رحلتي الحالية</h2>
+                    <div class="trip-status" id="tripStatus">
+                        <span class="status-indicator" id="statusIndicator"></span>
+                        <span class="status-text" id="statusText">في انتظار السائق</span>
+                    </div>
+                </div>
+
+                <div class="trip-card">
+                    <div class="trip-info">
+                        <div class="driver-info">
+                            <div class="driver-avatar">
+                                <img src="assets/driver-avatar.png" alt="صورة السائق" id="driverAvatar">
+                            </div>
+                            <div class="driver-details">
+                                <h3 id="driverName">أحمد محمد العتيبي</h3>
+                                <div class="driver-rating">
+                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    <span class="rating-text">4.8 (1250 رحلة)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="car-info">
+                            <div class="info-item">
+                                <span class="label">نوع السيارة:</span>
+                                <span class="value" id="carType">تويوتا كامري</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم اللوحة:</span>
+                                <span class="value" id="plateNumber">أ ب ج 1234</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم التواصل:</span>
+                                <span class="value">
+                                    <a href="tel:" class="contact-link">0509876543</a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="trip-timing">
+                            <div class="time-info">
+                                <span class="label">وقت الاستلام:</span>
+                                <span class="value" id="pickupTime">7:30 صباحاً</span>
+                            </div>
+                            <div class="time-info">
+                                <span class="label">الوصول المتوقع:</span>
+                                <span class="value" id="estimatedArrival">7:35 صباحاً</span>
+                            </div>
+                            <div class="time-info">
+                                <span class="label">المدة المتبقية:</span>
+                                <span class="value" id="timeRemaining">5 دقائق</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-map">
+                        <div class="map-container">
+                            <div class="map-header">
+                                <h4>مسار الرحلة المباشر</h4>
+                                <div class="map-controls">
+                                    <button class="map-btn" id="refreshMap"><i class="fas fa-sync-alt"></i> تحديث</button>
+                                    <button class="map-btn" id="fullscreenMap"><i class="fas fa-expand"></i> ملء الشاشة</button>
+                                </div>
+                            </div>
+                            <div class="map-content">
+                                <div class="route-info">
+                                    <div class="route-point">
+                                        <div class="point-icon start"><i class="fas fa-home"></i></div>
+                                        <div class="point-info">
+                                            <span class="point-label">منزلك</span>
+                                            <span class="point-address">القصيم، حي النهضة</span>
+                                        </div>
+                                    </div>
+                                    <div class="route-line">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="routeProgress"></div>
+                                        </div>
+                                        <div class="route-distance">12.5 كم</div>
+                                    </div>
+                                    <div class="route-point">
+                                        <div class="point-icon end"><i class="fas fa-graduation-cap"></i></div>
+                                        <div class="point-info">
+                                            <span class="point-label">الجامعة</span>
+                                            <span class="point-address">جامعة القصيم</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="driver-location">
+                                    <div class="location-indicator">
+                                        <div class="pulse-dot"></div>
+                                        <span>موقع السائق الحالي</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trip-actions">
+                    <button class="btn-secondary" id="callDriver"><i class="fas fa-phone"></i> اتصال بالسائق</button>
+                    <button class="btn-secondary" id="messageDriver"><i class="fas fa-comment"></i> رسالة للسائق</button>
+                    <button class="btn-danger" id="cancelTrip"><i class="fas fa-times"></i> إلغاء الرحلة</button>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section class="schedule-section">
+                <div class="schedule-header">
+                    <h2>جدولي الدراسي</h2>
+                    <button class="btn-secondary" onclick="editSchedule()">تعديل الجدول</button>
+                </div>
+                <div class="schedule-table">
+                    <div class="schedule-day">
+                        <div class="day-name">الأحد</div>
+                        <div class="day-times">7:00 ص - 3:00 م</div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">الاثنين</div>
+                        <div class="day-times">8:00 ص - 2:00 م</div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">الثلاثاء</div>
+                        <div class="day-times">7:30 ص - 4:00 م</div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">الأربعاء</div>
+                        <div class="day-times">8:30 ص - 1:30 م</div>
+                    </div>
+                    <div class="schedule-day">
+                        <div class="day-name">الخميس</div>
+                        <div class="day-times">7:00 ص - 3:30 م</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

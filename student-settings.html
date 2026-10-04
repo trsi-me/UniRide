@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - الإعدادات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/typography.css">
+    <style>
+        .settings-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-green);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .settings-header h1 {
+            margin: 0;
+            color: var(--dark-green);
+        }
+
+        .settings-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-section h2 {
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .settings-section h2 i {
+            font-size: 1.2rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-info h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .setting-info p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #757575;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--dark-green);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: var(--dark-green);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-save {
+            background-color: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-save:hover {
+            background-color: #2a9d6f;
+        }
+
+        select, input[type="text"], input[type="email"] {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            min-width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="settings-container">
+            <div class="settings-header">
+                <button class="back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <h1>الإعدادات</h1>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="settings-section">
+                <h2><i class="fas fa-user-circle"></i> الحساب</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>الاسم</h3>
+                        <p>فاطمة أحمد محمد</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="editProfile()">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>البريد الإلكتروني</h3>
+                        <p>fatima@uniride.com</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="editEmail()">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>رقم الجوال</h3>
+                        <p>0501234567</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="editPhone()">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>كلمة المرور</h3>
+                        <p>••••••••</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="changePassword()">
+                            <i class="fas fa-key"></i> تغيير
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="settings-section">
+                <h2><i class="fas fa-bell"></i> الإشعارات</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>إشعارات الرحلات</h3>
+                        <p>تلقي إشعارات عند تأكيد أو إلغاء الرحلات</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>إشعارات وصول السائق</h3>
+                        <p>تلقي إشعار عندما يقترب السائق من موقعك</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>إشعارات البريد الإلكتروني</h3>
+                        <p>تلقي ملخص أسبوعي عبر البريد الإلكتروني</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>إشعارات الرسائل النصية</h3>
+                        <p>تلقي رسائل نصية للتحديثات المهمة</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-section">
+                <h2><i class="fas fa-shield-alt"></i> الخصوصية والأمان</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>مشاركة الموقع</h3>
+                        <p>السماح للسائقين برؤية موقعك أثناء الرحلة</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>إظهار رقم الجوال</h3>
+                        <p>السماح للسائقين برؤية رقم جوالك</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>المصادقة الثنائية</h3>
+                        <p>حماية إضافية لحسابك</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="setup2FA()">
+                            <i class="fas fa-lock"></i> تفعيل
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="settings-section">
+                <h2><i class="fas fa-sliders-h"></i> التفضيلات</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>اللغة</h3>
+                        <p>لغة التطبيق</p>
+                    </div>
+                    <div class="setting-control">
+                        <select>
+                            <option value="ar" selected>العربية</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>الوضع الليلي</h3>
+                        <p>تفعيل الوضع الداكن</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>وقت الاستلام الافتراضي</h3>
+                        <p>الوقت المفضل للرحلات الصباحية</p>
+                    </div>
+                    <div class="setting-control">
+                        <input type="time" value="07:30">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div class="settings-section">
+                <h2><i class="fas fa-question-circle"></i> المساعدة والدعم</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>مركز المساعدة</h3>
+                        <p>الأسئلة الشائعة والإرشادات</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link">
+                            <i class="fas fa-external-link-alt"></i> فتح
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>تواصل معنا</h3>
+                        <p>support@uniride.com</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link">
+                            <i class="fas fa-envelope"></i> مراسلة
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>الشروط والأحكام</h3>
+                        <p>اطلع على شروط الخدمة</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link">
+                            <i class="fas fa-file-alt"></i> عرض
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-section">
+                <h2><i class="fas fa-exclamation-triangle"></i> منطقة الخطر</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>تسجيل الخروج</h3>
+                        <p>تسجيل الخروج من جميع الأجهزة</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-link" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> خروج
+                        </button>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>حذف الحساب</h3>
+                        <p>حذف حسابك وجميع بياناتك نهائياً</p>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn-danger" onclick="deleteAccount()">
+                            <i class="fas fa-trash"></i> حذف الحساب
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-save" onclick="saveSettings()">
+                <i class="fas fa-save"></i> حفظ التغييرات
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function editProfile() {
+            alert('ميزة تعديل الملف الشخصي قريباً!');
+        }
+
+        function editEmail() {
+            const newEmail = prompt('أدخل البريد الإلكتروني الجديد:');
+            if (newEmail) {
+                alert('تم تحديث البريد الإلكتروني!');
+            }
+        }
+
+        function editPhone() {
+            const newPhone = prompt('أدخل رقم الجوال الجديد:');
+            if (newPhone) {
+                alert('تم تحديث رقم الجوال!');
+            }
+        }
+
+        function changePassword() {
+            const oldPass = prompt('أدخل كلمة المرور الحالية:');
+            if (oldPass) {
+                const newPass = prompt('أدخل كلمة المرور الجديدة:');
+                if (newPass) {
+                    alert('تم تغيير كلمة المرور بنجاح!');
+                }
+            }
+        }
+
+        function setup2FA() {
+            alert('سيتم توجيهك لإعداد المصادقة الثنائية...');
+        }
+
+        function logout() {
+            if (confirm('هل أنت متأكدة من تسجيل الخروج؟')) {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        function deleteAccount() {
+            const confirmation = prompt('اكتبي "حذف" لتأكيد حذف الحساب:');
+            if (confirmation === 'حذف') {
+                alert('تم حذف حسابك. نأسف لرؤيتك تغادرين!');
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        function saveSettings() {
+            alert('تم حفظ الإعدادات بنجاح!');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - لوحة السائق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/driver-dashboard.css">
+    <link rel="stylesheet" href="styles/typography.css">
+    <style>
+        /* Prevent layout shift when loading trips */
+        #tripsList,
+        #tripRequestsList {
+            min-height: 200px;
+            transition: none !important;
+        }
+
+        .trips-list {
+            min-height: 200px;
+            transition: none !important;
+        }
+
+        .empty-state {
+            min-height: 200px;
+            transition: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>UniRide - وضع السائق</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="settings">
+                        <button class="settings-btn" onclick="window.location.href='driver-settings.html'">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                    <div class="profile">
+                        <button class="profile-btn" onclick="window.location.href='driver-profile.html'">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Driver Status Section -->
+            <section class="driver-status-section">
+                <div class="status-header">
+                    <h2>حالة السائق</h2>
+                    <div class="status-toggle">
+                        <button class="status-btn" id="statusToggle">
+                            <span class="status-indicator" id="statusIndicator"></span>
+                            <span class="status-text" id="statusText">متاح</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="driver-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-car"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalTrips">1,250</span>
+                            <span class="stat-label">إجمالي الرحلات</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="driverRating">4.8</span>
+                            <span class="stat-label">التقييم</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="todayEarnings">450</span>
+                            <span class="stat-label">أرباح اليوم (ريال)</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="workingHours">8.5</span>
+                            <span class="stat-label">ساعات العمل</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Today's Trips Section -->
+            <section class="trips-section">
+                <div class="trips-header">
+                    <h2>رحلات اليوم</h2>
+                    <div class="trips-controls">
+                        <button class="btn-secondary" id="refreshTrips"><i class="fas fa-sync-alt"></i> تحديث</button>
+                        <button class="btn-primary" id="addTrip" onclick="showAddTripModal()"><i
+                                class="fas fa-plus"></i> إضافة رحلة</button>
+                    </div>
+                </div>
+
+                <div class="trips-list" id="tripsList">
+                    <!-- Trip items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Trip Requests Section -->
+            <section class="trips-section">
+                <div class="trips-header">
+                    <h2>طلبات الرحلات المعلقة</h2>
+                    <div class="trips-controls">
+                        <button class="btn-secondary" id="refreshRequests"><i class="fas fa-sync-alt"></i>
+                            تحديث</button>
+                    </div>
+                </div>
+
+                <div class="trips-list" id="tripRequestsList">
+                    <!-- Trip requests will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Live Map Section -->
+            <section class="live-map-section">
+                <div class="map-header">
+                    <h2>الخريطة المباشرة</h2>
+                    <div class="map-controls">
+                        <button class="map-btn" id="centerMap"><i class="fas fa-crosshairs"></i> مركز الخريطة</button>
+                        <button class="map-btn" id="toggleTraffic"><i class="fas fa-traffic-light"></i> حركة
+                            المرور</button>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-content">
+                        <div class="route-overview">
+                            <div class="route-item">
+                                <div class="route-icon start"><i class="fas fa-home"></i></div>
+                                <div class="route-info">
+                                    <span class="route-label">الموقع الحالي</span>
+                                    <span class="route-address">القصيم، حي النهضة</span>
+                                </div>
+                            </div>
+
+                            <div class="route-progress">
+                                <div class="progress-line">
+                                    <div class="progress-fill" id="overallProgress"></div>
+                                </div>
+                                <div class="progress-stats">
+                                    <span>12.5 كم</span>
+                                    <span>25 دقيقة</span>
+                                </div>
+                            </div>
+
+                            <div class="route-item">
+                                <div class="route-icon end"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="route-info">
+                                    <span class="route-label">الوجهة التالية</span>
+                                    <span class="route-address">جامعة القصيم</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="students-locations">
+                            <h4>مواقع الطالبات</h4>
+                            <div class="location-list" id="studentsLocations">
+                                <!-- Student locations will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions Section -->
+            <section class="quick-actions-section">
+                <h2>إجراءات سريعة</h2>
+                <div class="actions-grid">
+                    <button class="action-btn" id="emergencyBtn" onclick="handleEmergency()">
+                        <div class="action-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="action-text">حالة طوارئ</div>
+                    </button>
+                    <button class="action-btn" id="fuelBtn" onclick="showFuelReport()">
+                        <div class="action-icon"><i class="fas fa-gas-pump"></i></div>
+                        <div class="action-text">تقرير وقود</div>
+                    </button>
+                    <button class="action-btn" id="maintenanceBtn" onclick="showMaintenanceReport()">
+                        <div class="action-icon"><i class="fas fa-wrench"></i></div>
+                        <div class="action-text">صيانة السيارة</div>
+                    </button>
+                    <button class="action-btn" id="supportBtn" onclick="contactSupport()">
+                        <div class="action-icon"><i class="fas fa-headset"></i></div>
+                        <div class="action-text">الدعم الفني</div>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Enhanced Student Details Modal -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">تفاصيل الطالبة</h3>
+                <button class="close-btn" onclick="closeStudentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="student-details">
+                    <div class="student-image">
+                        <img id="studentHouseImage" src="" alt="صورة واجهة المنزل" class="house-image">
+                        <div class="image-overlay">
+                            <button class="btn-secondary" onclick="viewFullImage()"><i class="fas fa-search-plus"></i>
+                                عرض كامل</button>
+                        </div>
+                    </div>
+
+                    <div class="student-info">
+                        <div class="info-section">
+                            <h4>معلومات الطالبة</h4>
+                            <div class="info-item">
+                                <span class="label">الاسم:</span>
+                                <span class="value" id="studentName"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">الجامعة:</span>
+                                <span class="value" id="studentUniversity"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">التخصص:</span>
+                                <span class="value" id="studentMajor"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">السنة الدراسية:</span>
+                                <span class="value" id="studentYear"></span>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>معلومات الرحلة</h4>
+                            <div class="info-item">
+                                <span class="label">رقم التواصل (واتساب):</span>
+                                <span class="value">
+                                    <a href="#" id="studentPhone" class="contact-link"><i class="fas fa-phone"></i></a>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">وقت المرور المحدد:</span>
+                                <span class="value" id="studentTime"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">الموقع:</span>
+                                <a href="#" id="studentLocationLink" target="_blank" class="location-link"><i
+                                        class="fas fa-map-marked-alt"></i> فتح
+                                    الموقع في الخرائط</a>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">العنوان:</span>
+                                <span class="value" id="studentAddress"></span>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>ملاحظات مهمة</h4>
+                            <div class="notes-container">
+                                <p id="studentNotes" class="notes-text"></p>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>جهة الاتصال الطارئة</h4>
+                            <div class="info-item">
+                                <span class="label">رقم الطوارئ:</span>
+                                <span class="value">
+                                    <a href="#" id="emergencyContact" class="contact-link"><i
+                                            class="fas fa-phone"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="callStudent()"><i class="fas fa-phone"></i> اتصال</button>
+                <button class="btn-secondary" onclick="messageStudent()"><i class="fas fa-comment"></i> رسالة</button>
+                <button class="btn-primary" onclick="startTrip()"><i class="fas fa-car"></i> بدء الرحلة</button>
+                <button class="btn-danger" onclick="closeStudentModal()"><i class="fas fa-times"></i> إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/driver-dashboard.js"></script>
+</body>
+
+</html>

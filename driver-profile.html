@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - الملف الشخصي للسائق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="styles/typography.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>UniRide</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="back-btn" onclick="window.location.href='driver-dashboard.html'">
+                        <span class="back-icon">←</span>
+                        العودة للوحة التحكم
+                    </button>
+                    <div class="profile">
+                        <button class="profile-btn">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Profile Header -->
+            <section class="profile-header">
+                <div class="profile-avatar">
+                    <img src="assets/driver-avatar.png" alt="صورة السائق" id="driverAvatar">
+                    <button class="change-avatar-btn" onclick="changeAvatar()"><i class="fas fa-camera"></i> تغيير الصورة</button>
+                </div>
+                <div class="profile-info">
+                    <h1 id="driverName">أحمد محمد العتيبي</h1>
+                    <p class="driver-title">سائق UniRide</p>
+                    <div class="driver-rating">
+                        <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                        <span class="rating-text">4.8 (1,250 رحلة)</span>
+                    </div>
+                    <div class="driver-status">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">متاح الآن</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Sections -->
+            <div class="profile-sections">
+                <!-- Personal Information -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>المعلومات الشخصية</h2>
+                        <button class="edit-btn" onclick="editPersonalInfo()"><i class="fas fa-edit"></i> تعديل</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">الاسم الكامل:</span>
+                                <span class="value" id="fullName">أحمد محمد العتيبي</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم الجوال:</span>
+                                <span class="value" id="phone">0509876543</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">البريد الإلكتروني:</span>
+                                <span class="value" id="email">driver@uniride.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">تاريخ الانضمام:</span>
+                                <span class="value" id="joinDate">15 يناير 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Vehicle Information -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>معلومات السيارة</h2>
+                        <button class="edit-btn" onclick="editVehicleInfo()"><i class="fas fa-edit"></i> تعديل</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">نوع السيارة:</span>
+                                <span class="value" id="carType">تويوتا كامري</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم اللوحة:</span>
+                                <span class="value" id="plateNumber">أ ب ج 1234</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم رخصة القيادة:</span>
+                                <span class="value" id="licenseNumber">1234567890</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">سنة الصنع:</span>
+                                <span class="value" id="carYear">2020</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">لون السيارة:</span>
+                                <span class="value" id="carColor">أبيض</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Work Statistics -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>إحصائيات العمل</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-car"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalTrips">1,250</span>
+                                    <span class="stat-label">إجمالي الرحلات</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="rating">4.8</span>
+                                    <span class="stat-label">التقييم العام</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalEarnings">45,000</span>
+                                    <span class="stat-label">إجمالي الأرباح (ريال)</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalHours">2,400</span>
+                                    <span class="stat-label">ساعات العمل</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Trips -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>الرحلات الأخيرة</h2>
+                        <button class="view-all-btn" onclick="viewAllTrips()"><i class="fas fa-eye"></i> عرض الكل</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="trips-list" id="recentTrips">
+                            <!-- Recent trips will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reviews -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>آراء الطالبات</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="reviews-list" id="reviewsList">
+                            <!-- Reviews will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings -->
+                <section class="profile-section">
+                    <div class="section-header">
+                        <h2>الإعدادات</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label">الإشعارات</span>
+                                    <span class="setting-desc">تلقي إشعارات الرحلات والتحديثات</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked aria-label="تفعيل الإشعارات">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label">الموقع المباشر</span>
+                                    <span class="setting-desc">مشاركة موقعك مع الطالبات</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked aria-label="تفعيل الموقع المباشر">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-label">الوضع الليلي</span>
+                                    <span class="setting-desc">تفعيل الوضع الليلي للواجهة</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" aria-label="تفعيل الوضع الليلي">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="profile-actions">
+                <button class="btn-secondary" onclick="changePassword()"><i class="fas fa-lock"></i> تغيير كلمة المرور</button>
+                <button class="btn-secondary" onclick="contactSupport()"><i class="fas fa-headset"></i> التواصل مع الدعم</button>
+                <button class="btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Personal Info Modal -->
+    <div class="modal" id="editPersonalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تعديل المعلومات الشخصية</h3>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPersonalForm">
+                    <div class="form-group">
+                        <label for="editFullName">الاسم الكامل:</label>
+                        <input type="text" id="editFullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">رقم الجوال:</label>
+                        <input type="tel" id="editPhone" name="phone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">البريد الإلكتروني:</label>
+                        <input type="email" id="editEmail" name="email" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditModal()">إلغاء</button>
+                <button class="btn-primary" onclick="savePersonalInfo()">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Vehicle Info Modal -->
+    <div class="modal" id="editVehicleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تعديل معلومات السيارة</h3>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editVehicleForm">
+                    <div class="form-group">
+                        <label for="editCarType">نوع السيارة:</label>
+                        <input type="text" id="editCarType" name="carType" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPlateNumber">رقم اللوحة:</label>
+                        <input type="text" id="editPlateNumber" name="plateNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLicenseNumber">رقم رخصة القيادة:</label>
+                        <input type="text" id="editLicenseNumber" name="licenseNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCarYear">سنة الصنع:</label>
+                        <input type="number" id="editCarYear" name="carYear" min="2000" max="2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCarColor">لون السيارة:</label>
+                        <input type="text" id="editCarColor" name="carColor" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditModal()">إلغاء</button>
+                <button class="btn-primary" onclick="saveVehicleInfo()">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/driver-profile.js"></script>
+</body>
+
+</html>

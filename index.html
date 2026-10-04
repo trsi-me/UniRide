@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - تسجيل الدخول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/typography.css">
+</head>
+
+<body>
+    <script src="js/api.js"></script>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo-section">
+                <h1 class="logo">UniRide</h1>
+                <p class="subtitle">نظام النقل الجامعي الذكي</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <h2 class="form-title">تسجيل الدخول إلى UniRide</h2>
+
+                <div class="form-group">
+                    <label for="emailPhone">رقم الجوال أو البريد الإلكتروني</label>
+                    <input type="text" id="emailPhone" name="emailPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">تسجيل الدخول</button>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+
+                <div class="signup-link">
+                    <p>ليس لديك حساب؟ <a href="signup.html">إنشاء حساب جديد</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Login Script with Real API
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('loginForm');
+            const emailPhoneField = document.getElementById('emailPhone');
+            const passwordField = document.getElementById('password');
+
+            // Show success message
+            function showSuccess(message) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'message message-success';
+                successDiv.textContent = message;
+                successDiv.style.cssText = `
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                    padding: 12px 16px;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                    font-weight: 500;
+                `;
+                loginForm.parentNode.insertBefore(successDiv, loginForm.parentNode.firstChild);
+
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 3000);
+            }
+
+            // Show error message
+            function showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message message-error';
+                errorDiv.textContent = message;
+                errorDiv.style.cssText = `
+                    background-color: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                    padding: 12px 16px;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                    font-weight: 500;
+                `;
+                loginForm.parentNode.insertBefore(errorDiv, loginForm.parentNode.firstChild);
+
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 3000);
+            }
+
+            // Form submission
+            loginForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                const emailPhone = emailPhoneField.value.trim();
+                const password = passwordField.value;
+
+                // Simple validation
+                if (!emailPhone || !password) {
+                    showError('يرجى ملء جميع الحقول');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                    return;
+                }
+
+                // Show loading
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'جاري تسجيل الدخول...';
+
+                try {
+                    // استدعاء API الحقيقي
+                    const response = await AuthAPI.login(emailPhone, password);
+
+                    if (response.success) {
+                        // حفظ بيانات المستخدم
+                        sessionStorage.setItem('currentUser', JSON.stringify(response.data.user));
+                        sessionStorage.setItem('userProfile', JSON.stringify(response.data.profile));
+
+                        // Show success
+                        showSuccess('تم تسجيل الدخول بنجاح!');
+
+                        // Redirect based on user type
+                        setTimeout(() => {
+                            if (response.data.user.user_type === 'student') {
+                                window.location.href = 'student-dashboard.html';
+                            } else if (response.data.user.user_type === 'driver') {
+                                window.location.href = 'driver-dashboard.html';
+                            }
+                        }, 1000);
+                    }
+                } catch (error) {
+                    showError(error.message || 'حدث خطأ أثناء تسجيل الدخول');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'تسجيل الدخول';
+                }
+            });
+
+            // Auto-focus on first field
+            emailPhoneField.focus();
+
+            // Handle Enter key
+            emailPhoneField.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    passwordField.focus();
+                }
+            });
+
+            passwordField.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            // Check if already logged in (only if not coming from logout)
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromLogout = urlParams.get('logout') === 'true';
+            
+            // التحقق من flag إعادة التوجيه لمنع الحلقة
+            const isRedirecting = sessionStorage.getItem('redirecting') === 'true';
+            
+            if (!fromLogout && !isRedirecting) {
+                checkAuthOnLoad().then(response => {
+                    if (response.authenticated) {
+                        // إزالة flag قبل إعادة التوجيه
+                        sessionStorage.removeItem('redirecting');
+                        
+                        if (response.user.user_type === 'student') {
+                            window.location.href = 'student-dashboard.html';
+                        } else if (response.user.user_type === 'driver') {
+                            window.location.href = 'driver-dashboard.html';
+                        }
+                    }
+                }).catch(error => {
+                    // في حالة الخطأ، إزالة flag
+                    sessionStorage.removeItem('redirecting');
+                });
+            } else if (isRedirecting) {
+                // إذا كنا في عملية إعادة توجيه، إزالة flag
+                sessionStorage.removeItem('redirecting');
+            }
+        });
+    </script>
+</body>
+
+</html>

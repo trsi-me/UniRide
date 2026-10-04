@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRide - إنشاء حساب جديد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/signup.css">
+    <link rel="stylesheet" href="styles/typography.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="signup-container">
+            <div class="logo-section">
+                <h1 class="logo">UniRide</h1>
+                <p class="subtitle">انضمي إلى مجتمع النقل الآمن</p>
+            </div>
+
+            <form class="signup-form" id="signupForm">
+                <h2 class="form-title">إنشاء حساب طالبة جديد</h2>
+
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الجوال</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                    <small class="form-hint">يجب أن يكون الرقم 10 أرقام</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="houseImage">صورة واجهة المنزل</label>
+                    <input type="file" id="houseImage" name="houseImage" accept="image/*">
+                    <small class="form-hint">سيساعد السائق في التعرف على موقع منزلك</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="locationLink">رابط الموقع الجغرافي</label>
+                    <input type="url" id="locationLink" name="locationLink" placeholder="https://maps.google.com/..."
+                        required>
+                    <small class="form-hint">انسخ الرابط من خرائط جوجل لموقع منزلك</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">إنشاء الحساب</button>
+                </div>
+
+                <div class="login-link">
+                    <p>لديك حساب بالفعل؟ <a href="index.html">تسجيل الدخول</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/signup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,980 @@
+/* Driver Dashboard Specific Styles */
+
+.driver-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.trips-list {
+    display: grid;
+    gap: 1rem;
+    min-height: 200px;
+    transition: none !important;
+}
+
+.trips-list:empty {
+    min-height: 200px;
+}
+
+#tripsList,
+#tripRequestsList {
+    min-height: 200px;
+    transition: none !important;
+}
+
+.trip-item {
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+    border: 2px solid transparent;
+}
+
+.trip-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--dark-green);
+    background-color: var(--light-green);
+}
+
+.trip-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.student-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.pickup-time {
+    background-color: var(--dark-green);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.trip-item-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.trip-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--light-gray);
+    font-size: 0.9rem;
+}
+
+.trip-detail-icon {
+    font-size: 1rem;
+    color: var(--dark-green);
+}
+
+/* Student Details Modal */
+.student-details {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.student-image {
+    text-align: center;
+}
+
+.student-image .house-image {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 3px solid var(--border-color);
+}
+
+.student-info {
+    display: grid;
+    gap: 1rem;
+}
+
+.student-info .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.student-info .info-item:hover {
+    background-color: var(--light-green);
+}
+
+.student-info .label {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.student-info .value {
+    font-weight: 600;
+    color: var(--dark-green);
+}
+
+.location-link {
+    color: var(--dark-green);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--dark-green);
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.location-link:hover {
+    background-color: var(--dark-green);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--light-gray);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: none !important;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.empty-state p {
+    margin: 0;
+}
+
+/* Loading State */
+.loading-trips {
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading-trips .loading {
+    margin: 0 auto;
+}
+
+/* Responsive Design for Driver Dashboard */
+@media (max-width: 768px) {
+    .driver-container {
+        padding: 0 1rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .trip-item {
+        padding: 1rem;
+    }
+
+    .trip-item-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+
+    .student-name {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .pickup-time {
+        text-align: center;
+        align-self: center;
+    }
+
+    .trip-item-details {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .student-details {
+        gap: 1rem;
+    }
+
+    .student-image .house-image {
+        max-height: 200px;
+    }
+
+    .student-info .info-item {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .driver-container {
+        padding: 0 0.5rem;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .trip-item {
+        padding: 0.75rem;
+    }
+
+    .student-name {
+        font-size: 1rem;
+    }
+
+    .pickup-time {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .trip-detail {
+        font-size: 0.8rem;
+    }
+
+    .student-image .house-image {
+        max-height: 150px;
+    }
+
+    .student-info .info-item {
+        padding: 0.75rem;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+    .page-title {
+        font-size: 1.2rem;
+    }
+
+    .trip-item {
+        padding: 0.5rem;
+    }
+
+    .trip-item-header {
+        margin-bottom: 0.75rem;
+    }
+
+    .student-name {
+        font-size: 0.95rem;
+    }
+
+    .pickup-time {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    .trip-detail {
+        font-size: 0.75rem;
+    }
+
+    .student-image .house-image {
+        max-height: 120px;
+    }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .driver-container {
+        padding: 0 0.5rem;
+    }
+
+    .page-title {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .trip-item {
+        padding: 0.75rem;
+    }
+
+    .trip-item-header {
+        margin-bottom: 0.5rem;
+    }
+
+    .student-image .house-image {
+        max-height: 100px;
+    }
+
+    .student-info .info-item {
+        padding: 0.5rem;
+    }
+}
+
+/* Enhanced Driver Dashboard Styles */
+.driver-status-section {
+    margin-bottom: 2rem;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.status-header h2 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.status-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.status-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: var(--light-green);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 500;
+}
+
+.status-btn:hover {
+    background-color: var(--dark-green);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--dark-green);
+    /* animation: pulse 2s infinite; */ /* تم تعطيله لمنع التحديث المستمر */
+}
+
+.status-indicator.offline {
+    background-color: #f44336;
+}
+
+.status-indicator.busy {
+    background-color: #ff9800;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Driver Stats */
+.driver-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card:nth-child(1) .stat-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card:nth-child(2) .stat-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+}
+
+.stat-card:nth-child(3) .stat-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.stat-card:nth-child(4) .stat-icon {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    font-weight: 500;
+}
+
+/* Trips Section */
+.trips-section {
+    margin-bottom: 2rem;
+}
+
+.trips-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.trips-header h2 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.trips-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.trip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trip-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.trip-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.trip-status.completed {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.trip-status.in-progress {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.trip-status.pending {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.trip-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.trip-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-detail .label {
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    margin-bottom: 0.25rem;
+}
+
+.trip-detail .value {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.trip-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.trip-action-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.trip-action-btn.view {
+    background-color: var(--light-green);
+    color: var(--text-dark);
+}
+
+.trip-action-btn.start {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.trip-action-btn.complete {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Live Map Section */
+.live-map-section {
+    margin-bottom: 2rem;
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.map-header h2 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.map-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.map-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: var(--light-green);
+    color: var(--text-dark);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.map-container {
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.map-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.route-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.route-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.route-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.route-icon.start {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    box-shadow: 0 4px 12px rgba(67, 233, 123, 0.3);
+}
+
+.route-icon.end {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+}
+
+.route-info {
+    flex: 1;
+}
+
+.route-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.route-address {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--light-gray);
+}
+
+.route-progress {
+    margin: 1rem 0;
+}
+
+.progress-line {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--dark-green), #2196f3);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.5s ease;
+    /* animation: progressAnimation 3s ease-in-out infinite; */ /* تم تعطيله لمنع التحديث المستمر */
+}
+
+@keyframes progressAnimation {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 60%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--light-gray);
+}
+
+.students-locations h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.location-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.location-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.location-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--dark-green);
+}
+
+/* Quick Actions Section */
+.quick-actions-section {
+    margin-bottom: 2rem;
+}
+
+.quick-actions-section h2 {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: none;
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.action-btn:hover::before {
+    opacity: 1;
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.action-btn:hover .action-icon {
+    transform: scale(1.1);
+}
+
+/* ألوان مختلفة لكل زر */
+#emergencyBtn .action-icon {
+    filter: drop-shadow(0 2px 8px rgba(244, 67, 54, 0.4));
+}
+
+#fuelBtn .action-icon {
+    filter: drop-shadow(0 2px 8px rgba(255, 152, 0, 0.4));
+}
+
+#maintenanceBtn .action-icon {
+    filter: drop-shadow(0 2px 8px rgba(33, 150, 243, 0.4));
+}
+
+#supportBtn .action-icon {
+    filter: drop-shadow(0 2px 8px rgba(76, 175, 80, 0.4));
+}
+
+.action-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* Enhanced Modal Styles */
+.info-section {
+    background-color: var(--dark-gray);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.info-section h4 {
+    color: var(--text-dark);
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.info-section .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-section .info-item:last-child {
+    border-bottom: none;
+}
+
+.info-section .info-item .label {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.info-section .info-item .value {
+    color: var(--light-gray);
+}
+
+.contact-link {
+    color: var(--dark-green);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.notes-container {
+    background-color: var(--primary-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--dark-green);
+}
+
+.notes-text {
+    margin: 0;
+    color: var(--text-dark);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Responsive Design for Enhanced Styles */
+@media (max-width: 768px) {
+    .driver-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trips-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .trips-controls {
+        justify-content: center;
+    }
+
+    .map-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .driver-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-details {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-actions {
+        flex-direction: column;
+    }
+}

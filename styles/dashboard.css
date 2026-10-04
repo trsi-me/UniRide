@@ -1,0 +1,694 @@
+/* Live Trip Tracking Section */
+.live-trip-section {
+    margin-bottom: 2rem;
+}
+
+.trip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trip-header h2 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.trip-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--light-green);
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--dark-green);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.status-indicator.waiting {
+    background-color: #ff9800;
+}
+
+.status-indicator.arriving {
+    background-color: #2196f3;
+}
+
+.status-indicator.arrived {
+    background-color: var(--dark-green);
+}
+
+/* Driver Info */
+.driver-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--dark-gray);
+    border-radius: 12px;
+}
+
+.driver-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--light-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.driver-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.driver-details h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+}
+
+.driver-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stars {
+    font-size: 0.9rem;
+}
+
+.rating-text {
+    color: var(--light-gray);
+    font-size: 0.9rem;
+}
+
+/* Car Info */
+.car-info {
+    margin-bottom: 1.5rem;
+}
+
+.car-info .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.car-info .info-item:hover {
+    background-color: var(--light-green);
+}
+
+.contact-link {
+    color: var(--dark-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+/* Trip Timing */
+.trip-timing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.time-info {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.time-info:hover {
+    background-color: var(--light-green);
+}
+
+.time-info .label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    margin-bottom: 0.5rem;
+}
+
+.time-info .value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-green);
+}
+
+/* Map Container */
+.map-container {
+    background-color: var(--dark-gray);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--light-green);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.map-header h4 {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.map-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.map-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: var(--primary-bg);
+    color: var(--text-dark);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.map-content {
+    padding: 1.5rem;
+}
+
+/* Route Info */
+.route-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.route-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.point-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background-color: var(--light-green);
+}
+
+.point-icon.start {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.point-icon.end {
+    background-color: #2196f3;
+    color: white;
+}
+
+.point-info {
+    flex: 1;
+}
+
+.point-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.point-address {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--light-gray);
+}
+
+.route-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--dark-green), #2196f3);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.5s ease;
+    animation: progressAnimation 3s ease-in-out infinite;
+}
+
+@keyframes progressAnimation {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 60%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.route-distance {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    font-weight: 500;
+}
+
+/* Driver Location */
+.driver-location {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--light-green);
+    border-radius: 8px;
+}
+
+.location-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--dark-green);
+    animation: pulse 1.5s infinite;
+}
+
+/* Trip Actions */
+.trip-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.trip-actions .btn-secondary,
+.trip-actions .btn-danger {
+    min-width: 150px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .trip-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .driver-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .trip-timing {
+        grid-template-columns: 1fr;
+    }
+
+    .map-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .map-controls {
+        justify-content: center;
+    }
+
+    .trip-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .trip-actions .btn-secondary,
+    .trip-actions .btn-danger {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .driver-info {
+        padding: 0.75rem;
+    }
+
+    .driver-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .map-content {
+        padding: 1rem;
+    }
+
+    .route-point {
+        gap: 0.75rem;
+    }
+
+    .point-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+.main-content {
+    padding: 2rem;
+    background-color: var(--primary-bg);
+    min-height: calc(100vh - 80px);
+}
+
+/* Upcoming Trip Section */
+.upcoming-trip {
+    margin-bottom: 2rem;
+}
+
+.upcoming-trip h2 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.trip-card {
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.trip-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.info-item:hover {
+    background-color: var(--light-green);
+}
+
+.info-item .label {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.info-item .value {
+    font-weight: 600;
+    color: var(--dark-green);
+}
+
+.trip-map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    min-height: 200px;
+}
+
+.map-placeholder {
+    text-align: center;
+    color: var(--light-gray);
+}
+
+.map-placeholder p {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.map-icon {
+    font-size: 3rem;
+    opacity: 0.7;
+}
+
+/* Schedule Section */
+.schedule-section {
+    margin-bottom: 2rem;
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.schedule-header h2 {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.schedule-table {
+    display: grid;
+    gap: 1rem;
+}
+
+.schedule-day {
+    background-color: var(--primary-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.schedule-day:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--dark-green);
+    font-size: 1.1rem;
+}
+
+.day-times {
+    color: var(--text-dark);
+    font-weight: 500;
+    text-align: left;
+}
+
+/* Responsive Design for Dashboard */
+@media (max-width: 1024px) {
+    .trip-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .trip-map {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .upcoming-trip h2,
+    .schedule-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .trip-card {
+        padding: 1rem;
+    }
+
+    .schedule-day {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .day-times {
+        text-align: center;
+    }
+
+    .schedule-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .schedule-header .btn-secondary {
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    .trip-card {
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+
+    .info-item {
+        padding: 0.5rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
+
+    .trip-map {
+        min-height: 120px;
+    }
+
+    .map-icon {
+        font-size: 2rem;
+    }
+
+    .schedule-day {
+        padding: 0.75rem;
+    }
+
+    .day-name {
+        font-size: 1rem;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+    .main-content {
+        padding: 0.5rem;
+    }
+
+    .upcoming-trip h2,
+    .schedule-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .trip-card {
+        padding: 0.5rem;
+    }
+
+    .info-item {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+
+    .schedule-day {
+        padding: 0.5rem;
+    }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .main-content {
+        padding: 0.5rem;
+    }
+
+    .trip-card {
+        grid-template-columns: 1fr 1fr;
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+
+    .trip-map {
+        min-height: 100px;
+    }
+
+    .schedule-day {
+        padding: 0.5rem;
+        grid-template-columns: 1fr 2fr;
+    }
+}
