@@ -3,17 +3,17 @@
 
 USE uniride;
 
--- إضافة المستخدمين (كلمة المرور: 123456)
+-- إضافة المستخدمين
 INSERT INTO users (name, email, phone, password, user_type, status) VALUES
-('فاطمة أحمد محمد', 'fatima@uniride.com', '0501234567', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('سارة عبدالله العتيبي', 'sara@uniride.com', '0502345678', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('نورا محمد القحطاني', 'nora@uniride.com', '0503456789', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('ريم عبدالرحمن الشمري', 'reem@uniride.com', '0504567890', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('هند سعد المطيري', 'hind@uniride.com', '0505678901', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('مريم خالد الغامدي', 'mariam@uniride.com', '0506789012', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'student', 'active'),
-('أحمد محمد العتيبي', 'ahmed@uniride.com', '0509876543', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'driver', 'active'),
-('خالد عبدالله القحطاني', 'khaled@uniride.com', '0508765432', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'driver', 'active'),
-('مدير النظام', 'admin@uniride.com', '0500000000', '$2y$10$ND8e6puWDLw3KlfQnC0U6uo8a3fzjcixJI26tKFPeIVozVIJ.Nh42', 'admin', 'active');
+('فاطمة أحمد محمد', 'fatima@uniride.com', '0501234567', '', 'student', 'active'),
+('سارة عبدالله العتيبي', 'sara@uniride.com', '0502345678', '', 'student', 'active'),
+('نورا محمد القحطاني', 'nora@uniride.com', '0503456789', '', 'student', 'active'),
+('ريم عبدالرحمن الشمري', 'reem@uniride.com', '0504567890', '', 'student', 'active'),
+('هند سعد المطيري', 'hind@uniride.com', '0505678901', '', 'student', 'active'),
+('مريم خالد الغامدي', 'mariam@uniride.com', '0506789012', '', 'student', 'active'),
+('أحمد محمد العتيبي', 'ahmed@uniride.com', '0509876543', '', 'driver', 'active'),
+('خالد عبدالله القحطاني', 'khaled@uniride.com', '0508765432', '', 'driver', 'active'),
+('مدير النظام', 'admin@uniride.com', '0500000000', '', 'admin', 'active');
 
 -- إضافة بيانات الطالبات
 INSERT INTO students (user_id, university, major, year, address, location_lat, location_lng, location_link, house_image, pickup_time, emergency_contact, notes) VALUES
